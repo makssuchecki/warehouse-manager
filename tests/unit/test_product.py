@@ -40,3 +40,27 @@ class TestProduct:
         assert result == True
         assert product.quantity == 2
         assert len(product.history) == 1
+
+    def test_receive_stock_invalid_amount(self, make_product):
+        product = make_product("Electric Guitar", 5)
+        result = product.receive_stock(0)
+
+        assert result is False
+        assert product.quantity == "Invalid amount"
+        assert len(product.history) == 0
+
+    def test_release_stock_invalid_amount(self, make_product):
+        product = make_product("Electric Guitar", 5)
+        result = product.release_stock(0)
+
+        assert result is False
+        assert product.quantity == 5
+        assert len(product.history) == 0
+
+    def test_release_stock_not_enough_quantity(self, make_product):
+        product = make_product("Electric Guitar", 2)
+        result = product.release_stock(10)
+
+        assert result is False
+        assert product.quantity == 2
+        assert len(product.history) == 0

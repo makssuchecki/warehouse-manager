@@ -1,4 +1,4 @@
-name: API tests 
+name: BDD tests 
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  api-tests:
+  bdd-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -46,4 +46,4 @@ jobs:
     
     - name: Execute API tests
       run: |
-        python3 -m pytest tests/api
+        python3 -m behave

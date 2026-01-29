@@ -9,13 +9,6 @@ def system_running(context):
     assert res.status_code == 200
 
 
-@given('a product "{name}" with quantity {quantity:d} exists')
-def product_exists(context, name, quantity):
-    requests.post(
-        f"{URL}/products",
-        json={"name": name, "quantity": quantity}
-    )
-
 @when('I add a product with name "{name}" and quantity {quantity:d}')
 def add_product(context, name, quantity):
     context.response = requests.post(

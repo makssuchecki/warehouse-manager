@@ -8,7 +8,7 @@ class TestAPI:
     def test_add_product(self):
         response = requests.post(
             f"{BASE_URL}/products",
-            json={"name": "Guitar", "quantity": 10}
+            json={"name": "Guitar", "quantity": 10, "price": 100}
         )
         assert response.status_code == 201
     
@@ -65,3 +65,13 @@ class TestAPI:
             headers={"Role": "admin"}
         )
         assert response.status_code == 200
+
+    def test_save_all(self):
+        response = requests.post(f"{BASE_URL}/products/save")
+        assert response.status_code == 200
+        assert response.json()["message"] == "Products saved to a database"
+
+    def test_load_all(self):
+        response = requests.post(f"{BASE_URL}/products/load")
+        assert response.status_code == 200
+        assert response.json()["message"] == "Products loaded from a database"

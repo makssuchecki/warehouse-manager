@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo_container_warehouse
+    platform: linux/arm64
+    ports:
+      - "27017:27017"

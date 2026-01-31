@@ -13,6 +13,7 @@ Aplikacja umożliwia:
 - kontrole poprawności operacji zgodnie z logiką biznesową (np. brak możliwości wydania towaru ponad dostępny stan)
 - tworzenie użytkowników
 - prowadzenie historii operacji wykonanych na produkcie
+- zapisywanie oraz wczytywanie aktualnego stanu produktów (do bazy mongo, funkcjonalność testowana z wykorzystaniem mockowania)
 
 Aplikacja zawiera komplenty zestaw testów automatycznych:
 
@@ -21,13 +22,17 @@ Aplikacja zawiera komplenty zestaw testów automatycznych:
 - testy bdd 
 - testy wydajnościowe
 
-Do wykonania testów potrzebne jest odpalenie flask:
+Do wykonania testów potrzbne jest odpalenie flask i docker:
 
 py -m flask --app app/api.py --debug run
+
+docker compose -f mongo.yml up
 
 Testy jednostkowe, API i wydajnościowe (pytest)
 
 py -m pytest
+
+py -m coverage run --source=src -m pytest tests/unit
 
 py -m coverage report --fail-under=100
 

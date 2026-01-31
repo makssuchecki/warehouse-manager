@@ -26,3 +26,6 @@ class Storage:
     
     def count_products(self):
         return len(self.products)
+    
+    def clear(self):
+        self.products = []

@@ -39,7 +39,7 @@ jobs:
 
     - name: wait for mongo
       run: |
-        sleep 7
+        sleep 10
     - name: Start flask
       run: |
         export FLASK_APP=app/api.py

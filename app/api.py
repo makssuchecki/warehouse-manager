@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, current_app
 from src.storage import Storage
 from src.product import Product
 from src.user import User
@@ -64,6 +64,7 @@ def save_products():
 
         return jsonify({"message": "Products saved to a database"}), 200
     except Exception as e:
+        current_app.logger.exception("Save failed")
         return jsonify({"error": str(e)}), 500
 
 @app.post("/products/load")

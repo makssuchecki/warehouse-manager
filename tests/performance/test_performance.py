@@ -19,7 +19,7 @@ class TestWarehousePerformance:
 
             res = requests.post(
                 f"{BASE_URL}/products",
-                json={"name": name, "quantity": 10},
+                json={"name": name, "quantity": 10, "price": 10},
                 timeout=self.TIMEOUT
             )
             assert res.status_code == 201
@@ -38,7 +38,7 @@ class TestWarehousePerformance:
 
         res = requests.post(
             f"{BASE_URL}/products",
-            json={"name": name, "quantity": 5},
+            json={"name": name, "quantity": 5, "price": 10},
             timeout=self.TIMEOUT
         )
         assert res.status_code == 201

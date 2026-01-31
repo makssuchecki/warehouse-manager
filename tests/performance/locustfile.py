@@ -12,7 +12,7 @@ class QuistartUser(HttpUser):
     def on_start(self):
         self.product_name = random_name()
         self.client.post(f"/products",
-                    json={"name": self.product_name, "quantity": 5})
+                    json={"name": self.product_name, "quantity": 5, "price": 10})
 
     @task(3)
     def get_products(self):

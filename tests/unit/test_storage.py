@@ -52,3 +52,17 @@ class TestStorage:
         storage.add_product(new_product1)
         storage.add_product(new_product2)
         assert storage.count_products() == 2
+
+    def test_clear_storage(self, storage: Storage):
+        product1 = Product("Guitar", 12)
+        product2 = Product("Piano", 4)
+
+        storage.add_product(product1)
+        storage.add_product(product2)
+
+        assert storage.count_products() == 2 
+
+        storage.clear()
+
+        assert storage.count_products() == 0
+        assert storage.get_all_products() == []

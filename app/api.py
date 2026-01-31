@@ -58,16 +58,22 @@ def release_stock():
 
 @app.post("/products/save")
 def save_products():
-    repo = MongoProductsRepository()
-    repo.save_all(storage.get_all_products())
+    try: 
+        repo = MongoProductsRepository()
+        repo.save_all(storage.get_all_products())
 
-    return jsonify({"message": "Products saved to a database"}), 200
+        return jsonify({"message": "Products saved to a database"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.post("/products/load")
 def load_products():
-    repo = MongoProductsRepository()
-    storage.clear()
-    products = repo.load_all()
-    for product in products:
-        storage.add_product(product)
-    return jsonify({"message": "Products loaded from a database"}), 200
+    try: 
+        repo = MongoProductsRepository()
+        storage.clear()
+        products = repo.load_all()
+        for product in products:
+            storage.add_product(product)
+        return jsonify({"message": "Products loaded from a database"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

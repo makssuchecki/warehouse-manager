@@ -1,41 +1,66 @@
-Maksymilian Suchecki
-Grupa 2
+# Warehouse Inventory API
 
-Założeniem aplikacji jest wsparcie w zarządzaniu produktami oraz operacjami magazynowymi sklepu muzycznego.
+A Flask-based REST API for managing products and warehouse operations for a music store. Built with a strong emphasis on test coverage and business-rule correctness — the project includes a complete automated testing pyramid (unit, API, BDD, and performance tests).
 
-Aplikacja umożliwia:
+## Overview
 
-- tworzenie produktów
-- usuwanie produktów (operacja dostępna wyłącznie dla użytkowników z rolą admin)
-- pobieranie listy produktów oraz pojedynczych zasobów
-- przyjmowanie towaru
-- wydawanie towaru
-- kontrole poprawności operacji zgodnie z logiką biznesową (np. brak możliwości wydania towaru ponad dostępny stan)
-- tworzenie użytkowników
-- prowadzenie historii operacji wykonanych na produkcie
+The application supports the core lifecycle of warehouse inventory management:
 
-Aplikacja zawiera komplenty zestaw testów automatycznych:
+- **Product management** — create products, retrieve a single product or the full product list, delete products (restricted to users with the `admin` role)
+- **Stock operations** — receive incoming stock and issue outgoing stock
+- **Business-rule validation** — enforces domain constraints such as preventing stock from being issued beyond the available quantity
+- **User management** — create users with role-based access control
+- **Operation history** — every operation performed on a product is logged and retrievable, providing a full audit trail
 
-- testy jednostkowe
-- testy api
-- testy bdd 
-- testy wydajnościowe
+## Tech Stack
 
-Do wykonania testów potrzebne jest odpalenie flask:
+- **Backend:** Python, Flask
+- **Database:** MongoDB
+- **Testing:** pytest, coverage.py, behave (BDD), Locust (load testing)
 
+## Getting Started
+
+### Prerequisites
+
+- Python 3.x
+- MongoDB instance (local or Docker)
+
+### Running the application
+
+```bash
 py -m flask --app app/api.py --debug run
+```
 
-Testy jednostkowe, API i wydajnościowe (pytest)
+## Testing
 
+The project maintains a complete, automated test suite covering four layers of quality assurance.
+
+### Unit & API tests (pytest)
+
+```bash
 py -m pytest
+```
 
+Check test coverage (project enforces 100% coverage):
+
+```bash
 py -m coverage report --fail-under=100
+```
 
-Testy BDD
+### Behavior-driven tests (BDD)
 
-py -m behave 
+```bash
+py -m behave
+```
 
-Test wydajnościowy (locust)
+### Performance / load tests (Locust)
 
+Requires the Flask server to be running (see above).
+
+```bash
 py -m locust -f ./tests/performance/locustfile.py --headless --run-time 10s -u 20 -r 5
+```
 
+## Author
+
+**Maksymilian Suchecki**
